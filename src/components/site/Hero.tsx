@@ -102,12 +102,18 @@ const Hero = () => {
       />
 
       {/* Multi-layer overlays for strong legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/65 to-foreground/20 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-foreground/95 via-foreground/70 to-foreground/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent pointer-events-none" />
+      {/* Brand color wash for richness */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-transparent mix-blend-multiply pointer-events-none" />
+      {/* Subtle grid texture */}
+      <div className="absolute inset-0 bg-grid-soft opacity-30 pointer-events-none" />
       {/* Vignette top */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-foreground/40 to-transparent pointer-events-none" />
-      {/* Accent glow bottom-right */}
-      <div className="absolute -bottom-40 -right-40 h-[700px] w-[700px] rounded-full bg-primary/20 blur-[100px] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-foreground/50 to-transparent pointer-events-none" />
+      {/* Animated accent blobs */}
+      <div className="absolute -bottom-40 -right-40 h-[700px] w-[700px] rounded-full bg-primary/30 blur-[100px] pointer-events-none animate-blob" />
+      <div className="absolute top-1/4 -left-32 h-[500px] w-[500px] rounded-full bg-primary-glow/20 blur-[120px] pointer-events-none animate-blob" style={{ animationDelay: "6s" }} />
+      <div className="absolute top-10 right-1/3 h-[280px] w-[280px] rounded-full bg-yellow-400/10 blur-[80px] pointer-events-none" />
 
       <div className="relative z-10 h-full container-tight flex flex-col">
 
@@ -164,10 +170,10 @@ const Hero = () => {
                   {/* Headline */}
                   <h1
                     className="mb-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl"
-                    style={{ textShadow: "0 2px 24px hsl(0 0% 0% / 0.5)" }}
+                    style={{ textShadow: "0 4px 32px hsl(0 0% 0% / 0.6)" }}
                   >
                     {slide.titleStart}{" "}
-                    <em className="not-italic text-primary-glow">{slide.titleAccent}</em>
+                    <em className="not-italic bg-gradient-to-r from-yellow-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(250,204,21,0.4)]">{slide.titleAccent}</em>
                     {slide.titleEnd}
                   </h1>
 
@@ -218,7 +224,7 @@ const Hero = () => {
         </div>
 
         {/* Bottom controls */}
-        <div className="pb-8 md:pb-10">
+        <div className="pb-16 md:pb-24">
           {/* Progress bars */}
           <div className="mb-5 flex items-center gap-1.5">
             {slides.map((item, i) => (
@@ -293,16 +299,11 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Mobile stats bar */}
-      <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/10 bg-foreground/50 backdrop-blur-md py-3 lg:hidden">
-        <div className="container-tight grid grid-cols-4 gap-2 text-primary-foreground">
-          {stats.map((item) => (
-            <div key={item.label} className="text-center">
-              <p className="font-display text-sm font-extrabold">{item.value}</p>
-              <p className="truncate text-[9px] uppercase tracking-wider opacity-60">{item.label}</p>
-            </div>
-          ))}
-        </div>
+      {/* Decorative bottom curve divider */}
+      <div className="absolute inset-x-0 bottom-0 z-[5] pointer-events-none">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-10 md:h-14 fill-background">
+          <path d="M0,80 C240,20 480,0 720,20 C960,40 1200,70 1440,30 L1440,80 Z" />
+        </svg>
       </div>
     </section>
   );
