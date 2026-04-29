@@ -293,16 +293,11 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Mobile stats bar */}
-      <div className="absolute inset-x-0 bottom-0 z-20 border-t border-white/10 bg-foreground/50 backdrop-blur-md py-3 lg:hidden">
-        <div className="container-tight grid grid-cols-4 gap-2 text-primary-foreground">
-          {stats.map((item) => (
-            <div key={item.label} className="text-center">
-              <p className="font-display text-sm font-extrabold">{item.value}</p>
-              <p className="truncate text-[9px] uppercase tracking-wider opacity-60">{item.label}</p>
-            </div>
-          ))}
-        </div>
+      {/* Decorative bottom curve divider */}
+      <div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full h-12 md:h-16 fill-background">
+          <path d="M0,80 C240,20 480,0 720,20 C960,40 1200,70 1440,30 L1440,80 Z" />
+        </svg>
       </div>
     </section>
   );
