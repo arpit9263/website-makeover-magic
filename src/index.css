@@ -154,9 +154,9 @@
   }
   /* Animated multi-color gradient (used for footer/hero accents) */
   .bg-animated-hero {
-    background: linear-gradient(120deg, hsl(248 70% 14%), hsl(258 65% 26%), hsl(248 70% 18%), hsl(220 60% 22%));
-    background-size: 300% 300%;
-    animation: gradient-shift 14s ease infinite;
+    background: linear-gradient(135deg, hsl(248 75% 10%) 0%, hsl(248 70% 16%) 35%, hsl(258 65% 22%) 65%, hsl(248 75% 12%) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 18s ease infinite;
   }
   /* Subtle grid texture */
   .bg-grid-soft {
