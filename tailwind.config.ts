@@ -150,6 +150,10 @@ export default {
         "ken-burns": "ken-burns 20s ease-in-out infinite alternate",
         "gradient-shift": "gradient-shift 8s ease infinite",
         "shine": "shine 2.4s ease-in-out infinite",
+        "drift-slow": "drift-slow 22s ease-in-out infinite",
+        "drift-reverse": "drift-reverse 28s ease-in-out infinite",
+        "parallax-y": "parallax-y 14s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 9s ease-in-out infinite",
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
