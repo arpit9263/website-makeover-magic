@@ -78,49 +78,68 @@ const Index = () => {
     <Layout>
       <Hero />
 
-      {/* Emergency CTA Strip */}
-      <div className="bg-red-600 text-white py-4">
+      {/* Emergency + Ayushman cards strip */}
+      <section className="relative -mt-8 md:-mt-12 z-20">
         <div className="container-tight">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-                <Ambulance className="w-5 h-5" />
+          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
+            {/* Emergency Card */}
+            <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-600 via-red-600 to-orange-600 text-white p-6 md:p-7 shadow-strong hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 group-hover:scale-125 transition-transform duration-700" />
+              <div className="absolute top-1/2 -right-20 w-48 h-48 rounded-full bg-white/5" />
+              <div className="absolute inset-0 overflow-hidden">
+                <span className="shine-el absolute inset-y-0 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
               </div>
-              <div>
-                <p className="font-bold text-sm md:text-base">Medical Emergency? Call us immediately</p>
-                <p className="text-red-100 text-xs">Available 24 hours, 7 days a week</p>
+              <div className="relative flex items-center gap-4">
+                <div className="shrink-0 relative">
+                  <span className="absolute inset-0 rounded-2xl bg-white/30 animate-ping" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center ring-1 ring-white/30">
+                    <Ambulance className="w-7 h-7" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 mb-1">Medical Emergency 24×7</p>
+                  <p className="font-display text-lg md:text-xl font-extrabold leading-tight">Need urgent care? Call us now</p>
+                  <p className="text-white/80 text-xs mt-1">Trained ambulance & critical care team on standby</p>
+                </div>
+                <a href={`tel:${hospitalInfo.phone.emergency}`}
+                  className="shrink-0 hidden sm:flex items-center gap-2 bg-white text-red-600 font-extrabold rounded-full px-5 py-2.5 text-sm hover:bg-red-50 transition-colors shadow-lg"
+                >
+                  <Phone className="w-4 h-4" />
+                  {hospitalInfo.phone.emergency}
+                </a>
               </div>
+              <a href={`tel:${hospitalInfo.phone.emergency}`} className="sm:hidden mt-4 flex items-center justify-center gap-2 bg-white text-red-600 font-extrabold rounded-full py-2.5 text-sm relative">
+                <Phone className="w-4 h-4" /> {hospitalInfo.phone.emergency}
+              </a>
             </div>
-            <a
-              href={`tel:${hospitalInfo.phone.emergency}`}
-              className="flex items-center gap-2 bg-white text-red-600 font-bold rounded-full px-5 py-2 text-sm hover:bg-red-50 transition-colors shrink-0 shadow-lg"
-            >
-              <Phone className="w-4 h-4" />
-              {hospitalInfo.phone.emergency}
-            </a>
-          </div>
-        </div>
-      </div>
 
-      {/* Ayushman Bharat Highlight */}
-      <div className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-900 text-white py-5">
-        <div className="container-tight">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center shrink-0">
-                <Shield className="w-6 h-6 text-yellow-300" />
+            {/* Ayushman Card */}
+            <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-700 via-emerald-700 to-teal-700 text-white p-6 md:p-7 shadow-strong hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute -bottom-12 -left-12 w-44 h-44 rounded-full bg-white/10 group-hover:scale-125 transition-transform duration-700" />
+              <div className="absolute -top-8 right-1/3 w-32 h-32 rounded-full bg-yellow-300/10" />
+              <div className="absolute inset-0 overflow-hidden">
+                <span className="shine-el absolute inset-y-0 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
               </div>
-              <div>
-                <p className="font-display text-lg md:text-xl font-extrabold">Ayushman Bharat PM-JAY Available</p>
-                <p className="text-white/70 text-xs mt-0.5">Cashless treatment for eligible PM-JAY beneficiaries · ₹5 Lakh coverage</p>
+              <div className="relative flex items-center gap-4">
+                <div className="shrink-0 w-14 h-14 rounded-2xl bg-yellow-400/20 backdrop-blur-sm flex items-center justify-center ring-1 ring-yellow-300/40">
+                  <Shield className="w-7 h-7 text-yellow-300" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-300/90 mb-1">PM-JAY Empaneled</p>
+                  <p className="font-display text-lg md:text-xl font-extrabold leading-tight">Ayushman Bharat — ₹5 Lakh Cover</p>
+                  <p className="text-white/80 text-xs mt-1">Cashless treatment for eligible beneficiaries</p>
+                </div>
+                <Button asChild className="hidden sm:inline-flex bg-yellow-400 hover:bg-yellow-300 text-emerald-900 font-bold rounded-full px-5 border-0 shadow-lg shrink-0">
+                  <Link to="/ayushman-bharat">Check Eligibility <ArrowRight className="w-3.5 h-3.5 ml-1" /></Link>
+                </Button>
               </div>
+              <Button asChild className="sm:hidden mt-4 w-full bg-yellow-400 hover:bg-yellow-300 text-emerald-900 font-bold rounded-full">
+                <Link to="/ayushman-bharat">Check Eligibility <ArrowRight className="w-3.5 h-3.5 ml-1" /></Link>
+              </Button>
             </div>
-            <Button asChild className="bg-yellow-400 hover:bg-yellow-300 text-emerald-900 font-bold rounded-full px-5 border-0 shadow-lg">
-              <Link to="/ayushman-bharat">Check Eligibility <ArrowRight className="w-3.5 h-3.5 ml-1" /></Link>
-            </Button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Quick Stats Bar */}
       <section className="py-8 border-b border-border bg-card">
