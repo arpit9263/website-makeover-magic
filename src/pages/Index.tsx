@@ -6,6 +6,7 @@ import DoctorCard from "@/components/site/DoctorCard";
 import Testimonials from "@/components/site/Testimonials";
 import FAQ from "@/components/site/FAQ";
 import AyushmanSection from "@/components/site/AyushmanSection";
+import AboutSection from "@/components/site/AboutSection";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -201,6 +202,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* About Kamla */}
+      <AboutSection />
 
       {/* Why Choose Us */}
       <section className="section-padding">
