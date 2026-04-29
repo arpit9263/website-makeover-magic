@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Menu, X, Phone, ChevronDown,
+  Menu, X, Phone, ChevronDown, Mail, Clock, Shield,
   Ambulance, FlaskConical, Bed, Pill, Microscope, Scan, Syringe, Stethoscope,
-  Heart, Eye, Bone, Brain, Baby, Activity, Smile, PhoneCall,
+  Heart, Eye, Bone, Brain, Activity, Smile, PhoneCall,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -44,7 +44,7 @@ const ServicesDropdown = () => (
     initial="hidden"
     animate="visible"
     exit="exit"
-    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[560px] rounded-2xl bg-card border border-border shadow-[0_20px_60px_-10px_hsl(248_60%_20%/0.20)] overflow-hidden z-50"
+    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] rounded-2xl bg-card border border-border shadow-strong overflow-hidden z-50"
   >
     <div className="p-2">
       <div className="px-3 py-2 mb-1">
@@ -80,7 +80,7 @@ const DepartmentsDropdown = () => (
     initial="hidden"
     animate="visible"
     exit="exit"
-    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-2xl bg-card border border-border shadow-[0_20px_60px_-10px_hsl(248_60%_20%/0.20)] overflow-hidden z-50"
+    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-2xl bg-card border border-border shadow-strong overflow-hidden z-50"
   >
     <div className="p-2">
       <div className="px-3 py-2 mb-1">
@@ -107,9 +107,9 @@ const DepartmentsDropdown = () => (
   </motion.div>
 );
 
-type DropdownItemProps = { to: string; label: string; dropdown?: React.ReactNode; scrolled: boolean; };
+type DropdownItemProps = { to: string; label: string; dropdown?: React.ReactNode };
 
-const NavItemWithDropdown = ({ to, label, dropdown, scrolled }: DropdownItemProps) => {
+const NavItemWithDropdown = ({ to, label, dropdown }: DropdownItemProps) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -124,12 +124,8 @@ const NavItemWithDropdown = ({ to, label, dropdown, scrolled }: DropdownItemProp
   }, []);
 
   const baseClasses = "px-3.5 py-2 rounded-full text-sm font-medium transition-all duration-200";
-  const activeClass = scrolled
-    ? "bg-primary/10 text-primary"
-    : "bg-white/15 text-white";
-  const inactiveClass = scrolled
-    ? "text-foreground/75 hover:text-primary hover:bg-primary/8"
-    : "text-white/85 hover:text-white hover:bg-white/12";
+  const activeClass = "bg-primary/10 text-primary";
+  const inactiveClass = "text-foreground/75 hover:text-primary hover:bg-primary/8";
 
   if (!dropdown) {
     return (
@@ -172,94 +168,113 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-[0_2px_30px_-8px_hsl(248_60%_20%/0.18)] border-b border-border/60"
-          : "bg-transparent"
-      )}
-    >
-      {/* Top bar — only shown when not scrolled on desktop */}
+    <header className="fixed top-0 inset-x-0 z-50">
+      {/* Slim Top utility bar — always visible (desktop) */}
       <div className={cn(
         "hidden md:block transition-all duration-300 overflow-hidden",
-        scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100"
+        scrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
       )}>
-        <div className="bg-primary/90 backdrop-blur-sm border-b border-white/10">
-          <div className="container-tight flex items-center justify-between h-9 text-xs text-white/80">
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Emergency 24×7: <a href={`tel:${hospitalInfo.phone.emergency}`} className="font-bold text-white ml-1 hover:text-gold transition-colors">{hospitalInfo.phone.emergency}</a>
+        <div className="bg-animated-hero text-white border-b border-white/10">
+          <div className="container-tight flex items-center justify-between h-10 text-xs">
+            <div className="flex items-center gap-6 text-white/85">
+              <span className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Emergency 24×7:
+                <a href={`tel:${hospitalInfo.phone.emergency}`} className="font-bold text-white hover:text-yellow-300 transition-colors">
+                  {hospitalInfo.phone.emergency}
+                </a>
               </span>
-              <span className="hidden lg:flex items-center gap-1.5">OPD: 10:00 AM – 7:00 PM</span>
+              <span className="hidden lg:flex items-center gap-1.5">
+                <Clock className="h-3 w-3" /> OPD: {hospitalInfo.workingHours.opd}
+              </span>
+              <a href={`mailto:${hospitalInfo.email}`} className="hidden xl:flex items-center gap-1.5 hover:text-white transition-colors">
+                <Mail className="h-3 w-3" /> {hospitalInfo.email}
+              </a>
             </div>
-            <div className="flex items-center gap-4">
-              <a href={`mailto:${hospitalInfo.email}`} className="hover:text-white transition-colors">{hospitalInfo.email}</a>
-              <Link to="/ayushman-bharat" className="flex items-center gap-1 font-semibold text-yellow-300 hover:text-yellow-200 transition-colors">
-                ✦ Ayushman Bharat Available
-              </Link>
-            </div>
+            <Link to="/ayushman-bharat" className="flex items-center gap-1.5 font-semibold text-yellow-300 hover:text-yellow-200 transition-colors">
+              <Shield className="h-3.5 w-3.5" />
+              Ayushman Bharat Accepted
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="container-tight flex items-center justify-between h-16 md:h-18">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className={cn(
-            "rounded-xl overflow-hidden transition-all duration-300",
-            scrolled ? "bg-transparent p-0" : "bg-white/10 backdrop-blur-sm p-1"
-          )}>
-            <img src={hospitalInfo.logo} alt={hospitalInfo.name + " logo"} className="w-28 h-auto object-contain" />
+      {/* Main bar — always white background for clear visibility */}
+      <div
+        className={cn(
+          "bg-white/95 backdrop-blur-xl transition-all duration-300 border-b",
+          scrolled
+            ? "shadow-[0_8px_30px_-8px_hsl(248_60%_20%/0.18)] border-border/60"
+            : "shadow-soft border-border/40"
+        )}
+      >
+        <div className="container-tight flex items-center justify-between h-20 md:h-[88px] gap-4">
+          {/* Logo — prominent presentation */}
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-hero opacity-0 group-hover:opacity-15 blur-md transition-opacity duration-500" />
+              <div className="relative bg-white rounded-2xl p-1.5 ring-1 ring-border/60 shadow-soft group-hover:shadow-medium transition-all">
+                <img
+                  src={hospitalInfo.logo}
+                  alt={hospitalInfo.name + " logo"}
+                  className="w-12 h-12 md:w-14 md:h-14 object-contain rounded-xl"
+                />
+              </div>
+            </div>
+            <div className="hidden sm:block leading-tight">
+              <p className="font-display text-lg md:text-xl font-extrabold text-primary tracking-tight">
+                {hospitalInfo.name}
+              </p>
+              <p className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+                {hospitalInfo.tagline}
+              </p>
+            </div>
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-0.5">
+            <NavItemWithDropdown to="/" label="Home" />
+            <NavItemWithDropdown to="/about" label="About" />
+            <NavItemWithDropdown to="/departments" label="Departments" dropdown={<DepartmentsDropdown />} />
+            <NavItemWithDropdown to="/doctors" label="Doctors" />
+            <NavItemWithDropdown to="/services" label="Services" dropdown={<ServicesDropdown />} />
+            <NavItemWithDropdown to="/gallery" label="Gallery" />
+            <NavItemWithDropdown to="/ayushman-bharat" label="Ayushman" />
+            <NavItemWithDropdown to="/contact" label="Contact" />
+          </nav>
+
+          {/* Right CTA cluster */}
+          <div className="hidden md:flex items-center gap-3 shrink-0">
+            <a href={`tel:${hospitalInfo.phone.reception}`}
+              className="hidden xl:flex items-center gap-2.5 group"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary/10 group-hover:bg-primary text-primary group-hover:text-white flex items-center justify-center transition-all">
+                <Phone className="w-4 h-4" />
+              </div>
+              <div className="leading-tight">
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">Reception</p>
+                <p className="text-sm font-bold text-foreground group-hover:text-primary transition-colors">{hospitalInfo.phone.reception}</p>
+              </div>
+            </a>
+            <Button asChild size="sm"
+              className="rounded-full font-semibold bg-primary text-white hover:bg-primary/90 shadow-soft hover:shadow-medium hover:-translate-y-0.5"
+            >
+              <Link to="/appointment">Book Appointment</Link>
+            </Button>
           </div>
-        </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-0.5">
-          <NavItemWithDropdown to="/" label="Home" scrolled={scrolled} />
-          <NavItemWithDropdown to="/about" label="About" scrolled={scrolled} />
-          <NavItemWithDropdown to="/departments" label="Departments" dropdown={<DepartmentsDropdown />} scrolled={scrolled} />
-          <NavItemWithDropdown to="/doctors" label="Doctors" scrolled={scrolled} />
-          <NavItemWithDropdown to="/services" label="Services" dropdown={<ServicesDropdown />} scrolled={scrolled} />
-          <NavItemWithDropdown to="/gallery" label="Gallery" scrolled={scrolled} />
-          <NavItemWithDropdown to="/ayushman-bharat" label="Ayushman" scrolled={scrolled} />
-          <NavItemWithDropdown to="/contact" label="Contact" scrolled={scrolled} />
-        </nav>
-
-        {/* Desktop right */}
-        <div className="hidden md:flex items-center gap-3">
-          <a href={`tel:${hospitalInfo.phone.reception}`}
-            className={cn(
-              "flex items-center gap-2 text-sm font-medium transition-smooth",
-              scrolled ? "text-foreground/80 hover:text-primary" : "text-white/85 hover:text-white"
-            )}
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2 rounded-lg hover:bg-accent text-foreground transition-smooth"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
           >
-            <Phone className="w-4 h-4" /> {hospitalInfo.phone.reception}
-          </a>
-          <Button asChild size="sm"
-            className={cn(
-              "rounded-full font-semibold transition-all",
-              scrolled
-                ? "bg-primary text-white hover:bg-primary/90 shadow-soft"
-                : "bg-white text-primary hover:bg-white/90 shadow-medium"
-            )}
-          >
-            <Link to="/appointment">Book Appointment</Link>
-          </Button>
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className={cn(
-            "lg:hidden p-2 rounded-lg transition-smooth",
-            scrolled ? "hover:bg-accent text-foreground" : "hover:bg-white/15 text-white"
-          )}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
       {/* Mobile menu */}
