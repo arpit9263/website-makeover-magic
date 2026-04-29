@@ -333,7 +333,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Preview */}
+      {/* Gallery Preview — masonry-style mosaic with rich hover */}
       <section className="section-padding bg-gradient-soft">
         <div className="container-tight">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
@@ -346,50 +346,202 @@ const Index = () => {
               <Link to="/gallery">View Gallery <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {galleryItems.slice(0, 4).map((item, i) => (
-              <Link key={item.id} to="/gallery"
-                className="group relative overflow-hidden rounded-2xl border border-border shadow-soft h-64 animate-fade-in-up"
-                style={{ animationDelay: `${i * 80}ms` }}
+          <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-3 md:gap-4 h-[440px] md:h-[480px]">
+            {galleryItems.slice(0, 5).map((item, i) => {
+              const spans = [
+                "col-span-2 row-span-2",     // big left
+                "col-span-1 row-span-1",
+                "col-span-1 row-span-1",
+                "col-span-1 row-span-1",
+                "col-span-1 row-span-1",
+              ];
+              return (
+                <Link
+                  key={item.id}
+                  to="/gallery"
+                  className={`group relative overflow-hidden rounded-2xl border border-border shadow-soft animate-fade-in-up ${spans[i]}`}
+                  style={{ animationDelay: `${i * 80}ms` }}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110 group-hover:rotate-1"
+                    loading="lazy"
+                  />
+                  {/* Always-on subtle overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+                  {/* Hover overlay deepens */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/60 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Shine sweep */}
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <span className="shine-el absolute inset-y-0 -left-1/2 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  </div>
+                  {/* Caption */}
+                  <div className="absolute left-4 right-4 bottom-4 text-white transform translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
+                    <p className="text-[10px] uppercase tracking-widest text-white/80">{item.category}</p>
+                    <h3 className="font-display font-bold text-sm md:text-base leading-tight">{item.title}</h3>
+                  </div>
+                  {/* Plus badge on hover */}
+                  <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 group-hover:scale-100 scale-75 transition-all duration-300">
+                    <ArrowRight className="w-4 h-4 -rotate-45" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Video / Virtual Tour section */}
+      <section className="section-padding relative overflow-hidden bg-foreground">
+        <img
+          src={hospitalInfo.images.exteriorWide}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-30 animate-ken-burns"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-foreground/90" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-primary-glow/30 blur-3xl animate-blob" />
+
+        <div className="container-tight relative z-10 grid lg:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-yellow-300 mb-3">★ Virtual Tour</p>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-5 leading-tight">
+              Step inside <span className="text-yellow-300">Kamla Hospital</span>
+            </h2>
+            <p className="text-white/80 leading-relaxed mb-7">
+              From our welcoming reception to advanced diagnostics, modern operation theatres and comfortable wards — see the care, technology and compassion that defines Kamla.
+            </p>
+            <div className="flex flex-wrap gap-3 mb-7">
+              {["NABH Standards", "Advanced Diagnostics", "24×7 ICU", "PM-JAY"].map((tag) => (
+                <span key={tag} className="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-semibold text-white/90 backdrop-blur-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <Button asChild size="lg" className="bg-yellow-400 hover:bg-yellow-300 text-primary font-bold rounded-full">
+              <Link to="/gallery">Explore Gallery <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            </Button>
+          </div>
+
+          {/* Video player */}
+          <div className="relative group">
+            <div className="absolute -inset-2 bg-gradient-to-tr from-yellow-300/40 to-primary-glow/40 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity rounded-[2rem]" />
+            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-strong ring-1 ring-white/20">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster={hospitalInfo.images.exteriorWide}
+                className="w-full h-full object-cover"
               >
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
-                <div className="absolute left-5 right-5 bottom-5 text-white">
-                  <p className="text-xs uppercase tracking-widest text-white/70">{item.category}</p>
-                  <h3 className="font-display font-bold text-base leading-tight">{item.title}</h3>
+                <source src="https://cdn.coverr.co/videos/coverr-doctors-walking-in-hospital-hallway-7251/1080p.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-white pointer-events-none">
+                <div className="leading-tight">
+                  <p className="text-[10px] uppercase tracking-widest text-white/70">Featured</p>
+                  <p className="font-display font-bold text-sm">Inside Kamla Hospital</p>
                 </div>
-              </Link>
-            ))}
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <Testimonials />
 
-      {/* Quick Contact */}
-      <section className="section-padding bg-gradient-soft">
-        <div className="container-tight">
+      {/* Quick Contact — Redesigned */}
+      <section className="section-padding bg-gradient-soft relative overflow-hidden">
+        <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-yellow-400/8 blur-3xl" />
+
+        <div className="container-tight relative z-10">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary mb-3">Get In Touch</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold">Quick Contact</h2>
-            <p className="text-muted-foreground mt-3">Reach us for appointments, queries or emergency support.</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary mb-3">★ Get In Touch</p>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold">We're here to help</h2>
+            <p className="text-muted-foreground mt-3">Reach us for appointments, queries or emergency support — anytime, any day.</p>
           </div>
-          <div className="grid sm:grid-cols-3 gap-5 max-w-3xl mx-auto">
+
+          <div className="grid lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
             {[
-              { icon: Phone, label: "Reception", value: hospitalInfo.phone.reception, href: `tel:${hospitalInfo.phone.reception}`, color: "bg-primary/10 text-primary" },
-              { icon: Ambulance, label: "Emergency 24/7", value: hospitalInfo.phone.emergency, href: `tel:${hospitalInfo.phone.emergency}`, color: "bg-red-50 text-red-600" },
-              { icon: MapPin, label: "Location", value: "Jhansi, Uttar Pradesh", href: `https://maps.google.com/?q=${hospitalInfo.mapQuery}`, color: "bg-primary/10 text-primary" },
+              {
+                icon: Phone,
+                label: "Reception",
+                value: hospitalInfo.phone.reception,
+                sub: "Appointments & helpdesk",
+                href: `tel:${hospitalInfo.phone.reception}`,
+                gradient: "from-primary to-primary-glow",
+                cta: "Call now",
+              },
+              {
+                icon: Ambulance,
+                label: "Emergency 24/7",
+                value: hospitalInfo.phone.emergency,
+                sub: "Round-the-clock critical care",
+                href: `tel:${hospitalInfo.phone.emergency}`,
+                gradient: "from-red-600 to-orange-500",
+                cta: "Call emergency",
+                accent: true,
+              },
+              {
+                icon: MapPin,
+                label: "Visit Us",
+                value: "Jhansi, Uttar Pradesh",
+                sub: hospitalInfo.address,
+                href: `https://maps.google.com/?q=${encodeURIComponent(hospitalInfo.mapQuery)}`,
+                gradient: "from-emerald-600 to-teal-600",
+                cta: "Get directions",
+              },
             ].map((c) => (
-              <a key={c.label} href={c.href}
-                className="group flex flex-col items-center text-center p-6 rounded-2xl bg-card border border-border hover:border-primary/25 hover:shadow-medium transition-all duration-200"
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className={`group relative overflow-hidden rounded-3xl bg-card border border-border lift-on-hover p-7 ${c.accent ? "ring-2 ring-red-400/30" : ""}`}
               >
-                <div className={`w-12 h-12 rounded-xl ${c.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                {/* Decorative gradient blob */}
+                <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full bg-gradient-to-br ${c.gradient} opacity-10 group-hover:opacity-25 group-hover:scale-125 transition-all duration-500`} />
+
+                <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${c.gradient} text-white flex items-center justify-center mb-5 shadow-soft group-hover:shadow-medium group-hover:-rotate-6 transition-all`}>
                   <c.icon className="w-6 h-6" />
                 </div>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">{c.label}</p>
-                <p className="font-display font-bold text-foreground">{c.value}</p>
+                <p className="relative text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-1.5">{c.label}</p>
+                <p className="relative font-display font-extrabold text-xl text-foreground mb-2">{c.value}</p>
+                <p className="relative text-sm text-muted-foreground mb-5">{c.sub}</p>
+                <span className="relative inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
+                  {c.cta} <ArrowRight className="w-4 h-4" />
+                </span>
               </a>
             ))}
+          </div>
+
+          {/* Mini Bar */}
+          <div className="max-w-6xl mx-auto mt-6 grid sm:grid-cols-3 gap-3 text-sm">
+            <div className="flex items-center gap-3 p-4 rounded-2xl bg-card border border-border">
+              <Clock className="w-5 h-5 text-primary shrink-0" />
+              <div className="leading-tight">
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">OPD Timing</p>
+                <p className="font-semibold">{hospitalInfo.workingHours.opd}</p>
+              </div>
+            </div>
+            <a href={`mailto:${hospitalInfo.email}`} className="flex items-center gap-3 p-4 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors">
+              <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                <span className="text-base">@</span>
+              </div>
+              <div className="leading-tight min-w-0">
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Email</p>
+                <p className="font-semibold truncate">{hospitalInfo.email}</p>
+              </div>
+            </a>
+            <Link to="/appointment" className="flex items-center justify-center gap-2 p-4 rounded-2xl bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
+              <Calendar className="w-4 h-4" /> Book an Appointment
+            </Link>
           </div>
         </div>
       </section>
