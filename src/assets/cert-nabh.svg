@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="nabhRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="92" fill="#fff" stroke="url(#nabhRing)" stroke-width="6"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#fbbf24" stroke-width="2"/>
+  <path id="topArc" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+  <path id="botArc" d="M 30 105 A 70 70 0 0 0 170 105" fill="none"/>
+  <text font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a" letter-spacing="2">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">NATIONAL ACCREDITATION</textPath>
+  </text>
+  <text font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#1e3a8a" letter-spacing="1.5">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">BOARD FOR HOSPITALS</textPath>
+  </text>
+  <rect x="50" y="78" width="100" height="44" rx="4" fill="#1e3a8a"/>
+  <text x="100" y="103" font-family="Arial, sans-serif" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">NABH</text>
+  <text x="100" y="117" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#fbbf24" text-anchor="middle" letter-spacing="2">ACCREDITED</text>
+  <polygon points="100,135 103,143 111,143 105,148 107,156 100,151 93,156 95,148 89,143 97,143" fill="#fbbf24"/>
+</svg>
