@@ -68,12 +68,6 @@ const facilities = [
   { icon: Shield, name: "Ayushman Bharat", desc: "PM-JAY empaneled" },
 ];
 
-const quickStats = [
-  { label: "Specialist Doctors", value: "10+", icon: Users },
-  { label: "Years of Service", value: "40+", icon: Clock },
-  { label: "Departments", value: "10+", icon: Award },
-  { label: "Emergency", value: "24×7", icon: Ambulance },
-];
 
 const Index = () => {
   return (
