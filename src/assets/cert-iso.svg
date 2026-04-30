@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="92" fill="#fff" stroke="#0369a1" stroke-width="6"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <path id="isoTop" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+  <path id="isoBot" d="M 30 105 A 70 70 0 0 0 170 105" fill="none"/>
+  <text font-family="Arial, sans-serif" font-size="10" font-weight="700" fill="#0369a1" letter-spacing="2.5">
+    <textPath href="#isoTop" startOffset="50%" text-anchor="middle">QUALITY MANAGEMENT</textPath>
+  </text>
+  <text font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#0369a1" letter-spacing="2">
+    <textPath href="#isoBot" startOffset="50%" text-anchor="middle">CERTIFIED SYSTEM</textPath>
+  </text>
+  <text x="100" y="92" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="#0369a1" text-anchor="middle">ISO</text>
+  <text x="100" y="115" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#0c4a6e" text-anchor="middle">9001:2015</text>
+  <line x1="65" y1="125" x2="135" y2="125" stroke="#fbbf24" stroke-width="2"/>
+  <text x="100" y="140" font-family="Arial, sans-serif" font-size="7" font-weight="700" fill="#64748b" text-anchor="middle" letter-spacing="2">CERTIFIED</text>
+</svg>
