@@ -10,15 +10,15 @@ const ayushmanEligibleIds = new Set([
 const DepartmentsGrid = ({ limit }: { limit?: number }) => {
   const list = limit ? departments.slice(0, limit) : departments;
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div className="mobile-card-scroll sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-5">
       {list.map((d, i) => {
         const Icon = iconMap[d.icon];
         const isAyushman = ayushmanEligibleIds.has(d.id);
         return (
           <Link
             key={d.id}
-            to={`/departments#${d.id}`}
-            className="group relative p-6 rounded-2xl bg-card border border-border hover:border-primary/30 shadow-soft hover:shadow-medium transition-all duration-300 animate-fade-in-up overflow-hidden"
+            to={`/departments?department=${d.id}`}
+            className="mobile-card-item sm:w-auto group relative p-6 rounded-2xl bg-card border border-border hover:border-primary/30 shadow-soft hover:shadow-medium transition-all duration-300 animate-fade-in-up overflow-hidden"
             style={{ animationDelay: `${i * 70}ms` }}
           >
             {/* Background decorative circle */}

@@ -158,7 +158,7 @@ const DoctorProfile = () => {
                   <h3 className="font-display font-bold text-lg mb-3">Department</h3>
                   <p className="font-semibold text-primary mb-2">{dept.name}</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">{dept.description}</p>
-                  <Link to={`/departments#${dept.id}`} className="inline-flex items-center gap-1 text-xs font-semibold text-primary mt-3 hover:underline">
+                  <Link to={`/departments?department=${dept.id}`} className="inline-flex items-center gap-1 text-xs font-semibold text-primary mt-3 hover:underline">
                     View Department <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>

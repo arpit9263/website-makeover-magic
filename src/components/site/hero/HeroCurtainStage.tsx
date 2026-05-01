@@ -28,6 +28,8 @@ const HeroCurtainStage = ({ currentSlide, previousSlide, transitionId, reduceMot
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
               draggable={false}
+              loading="eager"
+              decoding="async"
             />
             {/* Strong overlay on previous slide during exit */}
             <div className="absolute inset-0 bg-foreground/30" />
@@ -51,6 +53,8 @@ const HeroCurtainStage = ({ currentSlide, previousSlide, transitionId, reduceMot
           animate={reduceMotion ? {} : { scale: 1.0 }}
           transition={{ duration: 7, ease: "linear" }}
           draggable={false}
+          loading="eager"
+          decoding="async"
           fetchPriority="high"
         />
       </motion.div>

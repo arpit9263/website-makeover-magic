@@ -41,10 +41,10 @@ const Doctors = () => {
       <section className="section-padding">
         <div className="container-tight">
           {/* Department filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <div className="flex gap-2 mb-10 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center scrollbar-hide">
             <button
               onClick={() => setDept("all")}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+              className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                 dept === "all"
                   ? "bg-primary text-white shadow-soft"
                   : "bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/30"
@@ -56,7 +56,7 @@ const Doctors = () => {
               <button
                 key={d.id}
                 onClick={() => setDept(d.id)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                className={`shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                   dept === d.id
                     ? "bg-primary text-white shadow-soft"
                     : "bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/30"
@@ -74,7 +74,7 @@ const Doctors = () => {
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-5">
               {filtered.map((d, i) => <DoctorCard key={d.id} doctor={d} index={i} />)}
             </div>
           ) : (

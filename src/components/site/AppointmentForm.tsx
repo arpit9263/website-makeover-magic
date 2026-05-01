@@ -25,8 +25,25 @@ const AppointmentForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.department || !form.date) {
+    const phoneOk = /^[6-9]\d{9}$/.test(form.phone.trim());
+    const selectedDate = form.date ? new Date(form.date + "T00:00:00") : null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!form.name.trim() || !form.phone.trim() || !form.department || !form.date) {
       toast.error("Please fill all required fields");
+      return;
+    }
+    if (!phoneOk) {
+      toast.error("Please enter a valid 10-digit mobile number");
+      return;
+    }
+    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (selectedDate && selectedDate < today) {
+      toast.error("Please select today or a future appointment date");
       return;
     }
     setSubmitted(true);
@@ -58,7 +75,7 @@ const AppointmentForm = () => {
       </div>
       <div>
         <Label htmlFor="phone" className="mb-1.5 flex items-center gap-2"><Phone className="w-3.5 h-3.5" /> Phone *</Label>
-        <Input id="phone" type="tel" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+        <Input id="phone" type="tel" inputMode="numeric" required placeholder="10-digit mobile number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })} />
       </div>
       <div className="sm:col-span-2">
         <Label htmlFor="email" className="mb-1.5 flex items-center gap-2"><Mail className="w-3.5 h-3.5" /> Email</Label>
@@ -90,7 +107,7 @@ const AppointmentForm = () => {
       </div>
       <div className="sm:col-span-2">
         <Label htmlFor="date" className="mb-1.5 flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> Preferred date *</Label>
-        <Input id="date" type="date" required value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />
+        <Input id="date" type="date" required min={new Date().toISOString().split("T")[0]} value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />
       </div>
       <div className="sm:col-span-2">
         <Label htmlFor="message" className="mb-1.5 flex items-center gap-2"><MessageSquare className="w-3.5 h-3.5" /> Message</Label>

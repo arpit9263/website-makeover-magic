@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import HeroCurtainStage from "@/components/site/hero/HeroCurtainStage";
 import { slides, stats } from "@/components/site/hero/data";
 
-const AUTO_ADVANCE_MS = 6500;
+const AUTO_ADVANCE_MS = 3000;
+// const AUTO_ADVANCE_MS = 6500;
 
 const formatSlideNumber = (value: number) => value.toString().padStart(2, "0");
 
@@ -89,8 +90,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-foreground"
-      style={{ height: "min(92vh, 880px)", minHeight: "640px" }}
+      className="relative w-full overflow-hidden bg-foreground min-h-[560px] h-[100svh] max-h-[880px] sm:min-h-[620px]"
       aria-roledescription="carousel"
       aria-label="Kamla Hospital highlights"
     >
@@ -118,7 +118,7 @@ const Hero = () => {
       <div className="relative z-10 h-full container-tight flex flex-col">
 
         {/* Top bar */}
-        <div className="pt-24 md:pt-28 flex items-center justify-between gap-4">
+        <div className="pt-20 sm:pt-24 md:pt-28 flex items-center justify-between gap-4">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={`tag-${slide.id}`}
@@ -149,9 +149,9 @@ const Hero = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 flex items-center">
+        <div className="flex-1 flex items-center py-5 sm:py-8">
           <div className="w-full max-w-3xl text-primary-foreground">
-            <div className="relative min-h-[300px] md:min-h-[340px]">
+            <div className="relative min-h-[355px] min-[380px]:min-h-[340px] sm:min-h-[330px] md:min-h-[340px]">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={`content-${slide.id}`}
@@ -169,7 +169,7 @@ const Hero = () => {
 
                   {/* Headline */}
                   <h1
-                    className="mb-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl"
+                    className="mb-4 sm:mb-5 font-display text-[2.15rem] font-extrabold leading-[1.05] tracking-tight min-[380px]:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl"
                     style={{ textShadow: "0 4px 32px hsl(0 0% 0% / 0.6)" }}
                   >
                     {slide.titleStart}{" "}
@@ -179,18 +179,18 @@ const Hero = () => {
 
                   {/* Description */}
                   <p
-                    className="mb-8 max-w-xl text-base leading-relaxed text-primary-foreground/90 md:text-lg"
+                    className="mb-5 sm:mb-8 max-w-xl text-sm leading-relaxed text-primary-foreground/90 min-[380px]:text-base md:text-lg"
                     style={{ textShadow: "0 1px 8px hsl(0 0% 0% / 0.4)" }}
                   >
                     {slide.description}
                   </p>
 
                   {/* CTAs */}
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-col gap-2.5 min-[420px]:flex-row min-[420px]:flex-wrap sm:gap-3">
                     <Button
                       asChild
                       size="xl"
-                      className="bg-primary text-primary-foreground shadow-strong hover:bg-primary/90 group"
+                      className="w-full min-[420px]:w-auto justify-center bg-primary text-primary-foreground shadow-strong hover:bg-primary/90 group"
                     >
                       {slide.ctaPrimary.to.startsWith("tel:") ? (
                         <a href={slide.ctaPrimary.to}>
@@ -209,7 +209,7 @@ const Hero = () => {
                       asChild
                       size="xl"
                       variant="outline"
-                      className="border-white/30 bg-white/10 backdrop-blur-sm text-primary-foreground hover:bg-white/20 hover:border-white/50 hover:text-primary-foreground"
+                      className="w-full min-[420px]:w-auto justify-center border-white/30 bg-white/10 backdrop-blur-sm text-primary-foreground hover:bg-white/20 hover:border-white/50 hover:text-primary-foreground"
                     >
                       <Link to={slide.ctaSecondary.to}>
                         {slide.ctaSecondary.label}
@@ -224,28 +224,35 @@ const Hero = () => {
         </div>
 
         {/* Bottom controls */}
-        <div className="pb-16 md:pb-24">
+        <div className="pb-12 sm:pb-16 md:pb-24">
           {/* Progress bars */}
-          <div className="mb-5 flex items-center gap-1.5">
-            {slides.map((item, i) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => changeSlide(i)}
-                aria-label={`Go to slide ${i + 1}: ${item.tag}`}
-                aria-current={i === index}
-                className="group relative h-[3px] flex-1 cursor-pointer"
-              >
-                <span className="absolute inset-0 rounded-full bg-white/20 transition-colors group-hover:bg-white/35" />
-                {i < index && <span className="absolute inset-y-0 left-0 w-full rounded-full bg-white/80" />}
-                {i === index && (
-                  <span
-                    className="absolute inset-y-0 left-0 origin-left rounded-full bg-white will-change-transform"
-                    style={{ transform: `scaleX(${reduceMotion ? 1 : progress})` }}
-                  />
-                )}
-              </button>
-            ))}
+          <div className="mb-4 sm:mb-5 flex items-center gap-1.5" role="tablist" aria-label="Hero carousel slides">
+            {slides.map((item, i) => {
+              const isActive = i === index;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => changeSlide(i)}
+                  aria-label={`Go to slide ${i + 1}: ${item.tag}`}
+                  aria-current={isActive ? "true" : undefined}
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`group relative h-1 cursor-pointer overflow-hidden rounded-full transition-all duration-300 ${
+                    isActive ? "flex-[1.8] bg-white/55 shadow-[0_0_14px_rgba(255,255,255,0.35)]" : "flex-1 bg-white/20 hover:bg-white/35"
+                  }`}
+                >
+                  <span className="sr-only">{item.tag}</span>
+                  {isActive && (
+                    <span
+                      className="absolute inset-y-0 left-0 origin-left rounded-full bg-white will-change-transform"
+                      style={{ transform: `scaleX(${reduceMotion ? 1 : Math.max(progress, 0.12)})` }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-4">

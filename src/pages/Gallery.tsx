@@ -107,12 +107,12 @@ const Gallery = () => {
       <section className="section-padding">
         <div className="container-tight">
           {/* Category filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <div className="flex gap-2 mb-10 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center scrollbar-hide">
             {cats.map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                className={`shrink-0 px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                   cat === c
                     ? "bg-primary text-white shadow-soft"
                     : "bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/30"
@@ -124,12 +124,12 @@ const Gallery = () => {
           </div>
 
           {/* Masonry Grid */}
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {items.map((item, i) => (
               <button
                 key={item.id}
                 onClick={() => setActiveIndex(i)}
-                className="group relative w-full break-inside-avoid overflow-hidden rounded-2xl border border-border shadow-soft hover:shadow-strong transition-all duration-300 text-left animate-fade-in-up"
+                className="group relative w-full overflow-hidden rounded-2xl border border-border shadow-soft hover:shadow-strong transition-all duration-300 text-left animate-fade-in-up"
                 style={{ animationDelay: `${i * 40}ms` }}
               >
                 <img

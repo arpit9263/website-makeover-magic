@@ -22,14 +22,14 @@ const servicesMenu = [
 ];
 
 const departmentsMenu = [
-  { icon: Stethoscope,  label: "ENT",                  to: "/departments#ent" },
-  { icon: Activity,     label: "Gastro & Liver",       to: "/departments#gastro-liver" },
-  { icon: Bone,         label: "Orthopedic",           to: "/departments#orthopedics" },
-  { icon: Heart,        label: "Cardiology",           to: "/departments#cardiology" },
-  { icon: Eye,          label: "Ophthalmology",        to: "/departments#ophthalmology" },
-  { icon: Stethoscope,  label: "General & Pulmonary",  to: "/departments#general-pulmonary" },
-  { icon: Smile,        label: "Dental & Maxillofacial", to: "/departments#dental" },
-  { icon: Brain,        label: "Neurosurgery",         to: "/departments#neurosurgery" },
+  { icon: Stethoscope,  label: "ENT",                  to: "/departments?department=ent" },
+  { icon: Activity,     label: "Gastro & Liver",       to: "/departments?department=gastro-liver" },
+  { icon: Bone,         label: "Orthopedic",           to: "/departments?department=orthopedics" },
+  { icon: Heart,        label: "Cardiology",           to: "/departments?department=cardiology" },
+  { icon: Eye,          label: "Ophthalmology",        to: "/departments?department=ophthalmology" },
+  { icon: Stethoscope,  label: "General & Pulmonary",  to: "/departments?department=general-pulmonary" },
+  { icon: Smile,        label: "Dental & Maxillofacial", to: "/departments?department=dental" },
+  { icon: Brain,        label: "Neurosurgery",         to: "/departments?department=neurosurgery" },
 ];
 
 const dropdownVariants = {
@@ -99,7 +99,7 @@ const DepartmentsDropdown = () => (
         ))}
       </div>
       <div className="mt-2 mx-1 mb-1 pt-2 border-t border-border">
-        <Link to="/departments" className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-semibold text-primary hover:bg-accent transition-colors">
+        <Link to="/departments?department=all" className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-semibold text-primary hover:bg-accent transition-colors">
           All departments →
         </Link>
       </div>
@@ -159,7 +159,7 @@ const Header = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
 
-  useEffect(() => setMobileOpen(false), [location.pathname]);
+  useEffect(() => setMobileOpen(false), [location.pathname, location.search]);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -211,7 +211,7 @@ const Header = () => {
             : "shadow-soft border-border/40"
         )}
       >
-        <div className="container-tight flex items-center justify-between h-20 md:h-[88px] gap-4">
+        <div className="container-tight flex items-center justify-between h-16 md:h-[88px] gap-3">
           {/* Logo — prominent presentation */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative">
@@ -219,14 +219,14 @@ const Header = () => {
               <img
                 src={hospitalInfo.logo}
                 alt={hospitalInfo.name + " logo"}
-                className="relative w-12 h-12 md:w-14 md:h-14 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                className="relative w-10 h-10 md:w-14 md:h-14 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <div className="hidden sm:block leading-tight">
-              <p className="font-display text-lg md:text-xl font-extrabold text-primary tracking-tight">
+            <div className="block leading-tight min-w-0 max-w-[230px] sm:max-w-none">
+              <p className="font-display text-sm min-[390px]:text-base md:text-xl font-extrabold text-primary tracking-tight truncate">
                 {hospitalInfo.name}
               </p>
-              <p className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+              <p className="hidden min-[390px]:block text-[8px] md:text-[11px] uppercase tracking-[0.12em] md:tracking-[0.18em] text-muted-foreground font-semibold truncate">
                 {hospitalInfo.tagline}
               </p>
             </div>
@@ -266,7 +266,7 @@ const Header = () => {
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-accent text-foreground transition-smooth"
+            className="lg:hidden shrink-0 p-2 rounded-lg hover:bg-accent text-foreground transition-smooth"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -283,7 +283,7 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-border shadow-strong"
+            className="lg:hidden overflow-y-auto max-h-[calc(100vh-64px)] bg-white/95 backdrop-blur-xl border-t border-border shadow-strong"
           >
             <div className="container-tight py-4 flex flex-col gap-1">
               {/* Emergency strip */}
@@ -329,6 +329,11 @@ const Header = () => {
                       transition={{ duration: 0.2 }}
                       className="overflow-hidden pl-4"
                     >
+                      <Link to="/departments?department=all"
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-primary hover:bg-accent/60 transition-smooth"
+                      >
+                        All Departments
+                      </Link>
                       {departmentsMenu.map((d) => (
                         <Link key={d.label} to={d.to}
                           className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-foreground/80 hover:text-primary hover:bg-accent/60 transition-smooth"

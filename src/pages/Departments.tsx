@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import Layout from "@/components/site/Layout";
 import PageHeader from "@/components/site/PageHeader";
 import { Input } from "@/components/ui/input";
@@ -7,13 +7,46 @@ import { Button } from "@/components/ui/button";
 import { Search, ArrowRight, Check } from "lucide-react";
 import { departments, doctors } from "@/data/hospital";
 import { iconMap } from "@/lib/icons";
+import { cn } from "@/lib/utils";
 
 const Departments = () => {
   const [query, setQuery] = useState("");
-  const filtered = useMemo(
-    () => departments.filter((d) => d.name.toLowerCase().includes(query.toLowerCase()) || d.description.toLowerCase().includes(query.toLowerCase())),
-    [query]
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedDepartment = searchParams.get("department") || "all";
+
+  useEffect(() => {
+    const hashDepartment = window.location.hash.replace("#", "");
+    if (hashDepartment && departments.some((d) => d.id === hashDepartment)) {
+      setSearchParams({ department: hashDepartment }, { replace: true });
+    }
+  }, [setSearchParams]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [selectedDepartment]);
+
+  const selectedDepartmentName =
+    selectedDepartment === "all"
+      ? "All Departments"
+      : departments.find((d) => d.id === selectedDepartment)?.name || "All Departments";
+
+  const filtered = useMemo(() => {
+    const text = query.trim().toLowerCase();
+    return departments.filter((d) => {
+      const matchesDepartment = selectedDepartment === "all" || d.id === selectedDepartment;
+      const matchesSearch =
+        !text ||
+        d.name.toLowerCase().includes(text) ||
+        d.description.toLowerCase().includes(text) ||
+        d.treatments.some((t) => t.toLowerCase().includes(text));
+      return matchesDepartment && matchesSearch;
+    });
+  }, [query, selectedDepartment]);
+
+  const handleFilterClick = (departmentId: string) => {
+    setQuery("");
+    setSearchParams({ department: departmentId });
+  };
 
   return (
     <Layout>
@@ -31,6 +64,38 @@ const Departments = () => {
 
       <section className="section-padding">
         <div className="container-tight space-y-6">
+          <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-4 shadow-soft md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">Showing</p>
+              <h2 className="font-display text-xl font-extrabold text-foreground">{selectedDepartmentName}</h2>
+            </div>
+            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:flex-wrap md:justify-end md:overflow-visible md:px-0 md:pb-0">
+              <button
+                type="button"
+                onClick={() => handleFilterClick("all")}
+                className={cn(
+                  "shrink-0 rounded-full border px-4 py-2 text-xs font-semibold transition-smooth",
+                  selectedDepartment === "all" ? "border-primary bg-primary text-white shadow-soft" : "border-border bg-background text-foreground hover:border-primary/40 hover:text-primary"
+                )}
+              >
+                All Departments
+              </button>
+              {departments.map((d) => (
+                <button
+                  key={d.id}
+                  type="button"
+                  onClick={() => handleFilterClick(d.id)}
+                  className={cn(
+                    "shrink-0 rounded-full border px-4 py-2 text-xs font-semibold transition-smooth",
+                    selectedDepartment === d.id ? "border-primary bg-primary text-white shadow-soft" : "border-border bg-background text-foreground hover:border-primary/40 hover:text-primary"
+                  )}
+                >
+                  {d.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {filtered.map((d, i) => {
             const Icon = iconMap[d.icon];
             const deptDoctors = doctors.filter((doc) => doc.departmentId === d.id);

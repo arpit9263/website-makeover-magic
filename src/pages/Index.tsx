@@ -191,16 +191,16 @@ const Index = () => {
       {/* Departments */}
       <section className="section-padding bg-gradient-soft">
         <div className="container-tight">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-            <div className="max-w-xl">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary mb-3">Specialties</p>
-              <h2 className="font-display text-3xl md:text-5xl font-extrabold">Our centers of excellence</h2>
-              <p className="text-sm text-muted-foreground mt-2 flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-emerald-600" />
-                Departments with <span className="font-bold text-emerald-700 mx-0.5">Ayushman</span> badge are covered under PM-JAY.
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-4">
+            <div className="max-w-xl text-left">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-primary mb-3">Specialties</p>
+              <h2 className="font-display text-[28px] leading-tight sm:text-3xl md:text-5xl font-extrabold">Our centers of excellence</h2>
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed flex items-start gap-2 sm:items-center">
+                <Shield className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 sm:mt-0" />
+                <span>Departments with <span className="font-bold text-emerald-700">Ayushman</span> badge are covered under PM-JAY.</span>
               </p>
             </div>
-            <Button asChild variant="outline" className="rounded-full border-primary/30 text-primary hover:bg-primary hover:text-white transition-all">
+            <Button asChild variant="outline" className="w-full sm:w-auto justify-center rounded-full border-primary/30 text-primary hover:bg-primary hover:text-white transition-all">
               <Link to="/departments">View all departments <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </div>
@@ -221,9 +221,11 @@ const Index = () => {
               <Link to="/doctors">View All Doctors <ArrowRight className="w-4 h-4" /></Link>
             </Button>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="mobile-card-scroll sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-5">
             {doctors.slice(0, 4).map((d, i) => (
-              <DoctorCard key={d.id} doctor={d} index={i} />
+              <div key={d.id} className="mobile-card-item sm:contents">
+                <DoctorCard doctor={d} index={i} />
+              </div>
             ))}
           </div>
         </div>
@@ -239,10 +241,10 @@ const Index = () => {
             </h2>
             <p className="text-muted-foreground mt-3">Modern infrastructure for complete medical care — from OPD to ICU.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mobile-card-scroll sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
             {facilities.map((f, i) => (
               <div key={f.name}
-                className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/25 hover:shadow-soft transition-all duration-200 animate-fade-in-up"
+                className="mobile-card-item sm:w-auto flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/25 hover:shadow-soft transition-all duration-200 animate-fade-in-up"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
@@ -272,11 +274,11 @@ const Index = () => {
               Recognized for clinical excellence and patient safety by India's leading healthcare authorities.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 md:gap-6">
+          <div className="certification-mobile-scroll sm:grid sm:grid-cols-3 lg:grid-cols-5 sm:gap-5 md:gap-6">
             {accreditations.map((a) => (
               <div
                 key={a.label}
-                className="group flex flex-col items-center text-center p-5 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-soft transition-all"
+                className="certification-mobile-card group flex flex-col items-center text-center p-5 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-soft transition-all"
               >
                 <img
                   src={a.src}

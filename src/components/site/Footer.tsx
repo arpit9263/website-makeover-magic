@@ -167,7 +167,7 @@ const Footer = () => {
             </div>
             <div className="flex gap-2.5">
               {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                <a key={i} href="#"
+                <a key={i} href="/contact"
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-yellow-400 hover:text-primary flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-6"
                 >
                   <Icon className="w-4 h-4" />
@@ -216,7 +216,7 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm text-white/65">
               {departments.slice(0, 7).map((d) => (
                 <li key={d.id}>
-                  <Link to={`/departments#${d.id}`} className="hover:text-yellow-300 transition-colors">{d.name}</Link>
+                  <Link to={`/departments?department=${d.id}`} className="hover:text-yellow-300 transition-colors">{d.name}</Link>
                 </li>
               ))}
             </ul>

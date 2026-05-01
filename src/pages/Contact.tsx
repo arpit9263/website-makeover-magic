@@ -77,8 +77,19 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    const phoneOk = !form.phone.trim() || /^[6-9]\d{9}$/.test(form.phone.trim());
+
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Please complete the required fields");
+      return;
+    }
+    if (!emailOk) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (!phoneOk) {
+      toast.error("Please enter a valid 10-digit mobile number");
       return;
     }
     toast.success("Message sent! We'll respond within 24 hours.");
@@ -174,10 +185,10 @@ const Contact = () => {
               <h3 className="font-display text-lg font-extrabold mb-4">Connect with us</h3>
               <div className="flex flex-wrap gap-2.5">
                 {[
-                  { Icon: Facebook, label: "Facebook", href: "#" },
-                  { Icon: Instagram, label: "Instagram", href: "#" },
-                  { Icon: Twitter, label: "Twitter", href: "#" },
-                  { Icon: Linkedin, label: "LinkedIn", href: "#" },
+                  { Icon: Facebook, label: "Facebook", href: "/contact" },
+                  { Icon: Instagram, label: "Instagram", href: "/contact" },
+                  { Icon: Twitter, label: "Twitter", href: "/contact" },
+                  { Icon: Linkedin, label: "LinkedIn", href: "/contact" },
                 ].map(({ Icon, label, href }) => (
                   <a key={label} href={href} aria-label={label}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent text-foreground hover:bg-primary hover:text-white transition-all hover:-translate-y-0.5 text-sm font-semibold"
@@ -205,7 +216,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <Label htmlFor="cphone" className="mb-1.5">Phone</Label>
-                    <Input id="cphone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                    <Input id="cphone" type="tel" inputMode="numeric" placeholder="10-digit mobile number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "").slice(0, 10) })} />
                   </div>
                 </div>
                 <div>

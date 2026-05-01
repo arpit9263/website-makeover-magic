@@ -19,7 +19,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
       <Header />
       <main className="flex-1 pt-20 md:pt-[128px]">{children}</main>
       <Footer />
