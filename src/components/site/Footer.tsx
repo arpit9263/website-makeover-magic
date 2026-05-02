@@ -264,8 +264,16 @@ const Footer = () => {
         <div className="border-t border-white/10 bg-black/20 backdrop-blur-sm">
           <div className="container-tight py-5 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-white/50">
             <p>© {new Date().getFullYear()} {hospitalInfo.name}. All rights reserved.</p>
-            <p className="flex items-center gap-1.5">
-              Made with <Heart className="w-3 h-3 text-red-400 fill-red-400 animate-pulse" /> for better healthcare in Jhansi
+            <p className="text-sm text-gray-500">
+              Designed & Devloped by{" "}
+              <a
+                href="https://rewantechsolutions.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition"
+              >
+                Rewan Tech Solutions
+              </a>
             </p>
             <p className="flex items-center gap-1.5">
               <Shield className="w-3 h-3 text-emerald-400" />
