@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ChevronRight, Pause, Play, Shield } from "lucide-react";
+import { ArrowRight, ChevronRight, Pause, Play, Shield, Award, Clock, BedDouble, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroCurtainStage from "@/components/site/hero/HeroCurtainStage";
 import { slides, stats } from "@/components/site/hero/data";
