@@ -192,6 +192,26 @@ const Hero = () => {
                       </Link>
                     </Button>
                   </div>
+
+                  {/* Trust micro-strip */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.55, duration: 0.5 }}
+                    className="mt-5 sm:mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/85"
+                  >
+                    {[
+                      { Icon: ShieldCheck, label: "NABH-aligned care" },
+                      { Icon: Award, label: "40+ Years of trust" },
+                      { Icon: BedDouble, label: "120 Beds · ICU/NICU/ICCU" },
+                      { Icon: Clock, label: "OPD 10AM–7PM" },
+                    ].map(({ Icon, label }) => (
+                      <span key={label} className="inline-flex items-center gap-1.5">
+                        <Icon className="h-3.5 w-3.5 text-yellow-300" />
+                        <span className="font-medium tracking-wide">{label}</span>
+                      </span>
+                    ))}
+                  </motion.div>
                 </motion.div>
               </AnimatePresence>
             </div>
