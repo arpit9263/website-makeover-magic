@@ -228,11 +228,11 @@ const Header = () => {
           <nav className="hidden lg:flex items-center gap-0.5">
             <NavItemWithDropdown to="/" label="Home" />
             <NavItemWithDropdown to="/about" label="About" />
+            <NavItemWithDropdown to="/ayushman-bharat" label="Ayushman" />
             <NavItemWithDropdown to="/departments" label="Departments" dropdown={<DepartmentsDropdown />} />
             <NavItemWithDropdown to="/doctors" label="Doctors" />
             <NavItemWithDropdown to="/services" label="Services" dropdown={<ServicesDropdown />} />
             <NavItemWithDropdown to="/gallery" label="Gallery" />
-            <NavItemWithDropdown to="/ayushman-bharat" label="Ayushman" />
             <NavItemWithDropdown to="/contact" label="Contact" />
           </nav>
 
@@ -290,9 +290,9 @@ const Header = () => {
               {[
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },
+                { to: "/ayushman-bharat", label: "Ayushman Bharat" },
                 { to: "/doctors", label: "Doctors" },
                 { to: "/gallery", label: "Gallery" },
-                { to: "/ayushman-bharat", label: "Ayushman Bharat" },
                 { to: "/contact", label: "Contact" },
               ].map((item) => (
                 <NavLink key={item.to} to={item.to} end={item.to === "/"}
