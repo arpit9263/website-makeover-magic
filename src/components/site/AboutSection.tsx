@@ -27,7 +27,7 @@ const AboutSection = () => {
               <img
                 src={hospitalInfo.images.exteriorWide}
                 alt="Kamla Hospital exterior"
-                className="w-full h-[420px] md:h-[520px] object-cover group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
+                className="w-full h-[420px] md:h-[520px] object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />

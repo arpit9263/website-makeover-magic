@@ -1,23 +1,39 @@
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import About from "./pages/About.tsx";
-import Departments from "./pages/Departments.tsx";
-import Doctors from "./pages/Doctors.tsx";
-import DoctorProfile from "./pages/DoctorProfile.tsx";
-import AyushmanBharat from "./pages/AyushmanBharat.tsx";
-import Gallery from "./pages/Gallery.tsx";
-import Services from "./pages/Services.tsx";
-import Appointment from "./pages/Appointment.tsx";
-import Contact from "./pages/Contact.tsx";
-import NotFound from "./pages/NotFound.tsx";
 import SeoManager from "@/components/site/SeoManager";
 import CloudflareAnalytics from "@/components/site/CloudflareAnalytics";
 
-const queryClient = new QueryClient();
+const Index = lazy(() => import("./pages/Index"));
+const About = lazy(() => import("./pages/About"));
+const Departments = lazy(() => import("./pages/Departments"));
+const Doctors = lazy(() => import("./pages/Doctors"));
+const DoctorProfile = lazy(() => import("./pages/DoctorProfile"));
+const AyushmanBharat = lazy(() => import("./pages/AyushmanBharat"));
+const Gallery = lazy(() => import("./pages/Gallery"));
+const Services = lazy(() => import("./pages/Services"));
+const Appointment = lazy(() => import("./pages/Appointment"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
+const RouteLoader = () => (
+  <div className="min-h-screen bg-background flex items-center justify-center px-4 text-sm font-medium text-muted-foreground">
+    Loading Kamla Hospital...
+  </div>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -27,20 +43,21 @@ const App = () => (
       <BrowserRouter>
         <SeoManager />
         <CloudflareAnalytics />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/departments" element={<Departments />} />
-          <Route path="/doctors" element={<Doctors />} />
-          <Route path="/doctors/:id" element={<DoctorProfile />} />
-          <Route path="/ayushman-bharat" element={<AyushmanBharat />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/departments" element={<Departments />} />
+            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/doctors/:id" element={<DoctorProfile />} />
+            <Route path="/ayushman-bharat" element={<AyushmanBharat />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

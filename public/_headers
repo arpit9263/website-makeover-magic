@@ -23,3 +23,20 @@
 
 /*.ico
   Cache-Control: public, max-age=604800
+
+# HTML should revalidate so users get new deployments quickly
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Media cache
+/*.jpg
+  Cache-Control: public, max-age=604800
+
+/*.jpeg
+  Cache-Control: public, max-age=604800
+
+/*.mp4
+  Cache-Control: public, max-age=604800

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/site/Layout";
 import Hero from "@/components/site/Hero";
@@ -82,6 +83,27 @@ const accreditations = [
 ];
 
 const Index = () => {
+  const videoWrapRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const node = videoWrapRef.current;
+    if (!node || shouldLoadVideo) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
+
   return (
     <Layout>
       <Hero />
@@ -349,7 +371,7 @@ const Index = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110 group-hover:rotate-1"
+                    className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-1"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
@@ -404,19 +426,30 @@ const Index = () => {
           </div>
 
           {/* Video player */}
-          <div className="relative group">
+          <div ref={videoWrapRef} className="relative group">
             <div className="absolute -inset-2 bg-gradient-to-tr from-yellow-300/40 to-primary-glow/40 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity rounded-[2rem]" />
             <div className="relative aspect-video rounded-3xl overflow-hidden shadow-strong ring-1 ring-white/20">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster={hospitalInfo.images.exteriorWide}
-                className="w-full h-full object-cover"
-              >
-                <source src={virtualTourVideo} type="video/mp4" />
-              </video>
+              {shouldLoadVideo ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={hospitalInfo.images.exteriorWide}
+                  className="w-full h-full object-cover"
+                >
+                  <source src={virtualTourVideo} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  src={hospitalInfo.images.exteriorWide}
+                  alt="Kamla Hospital virtual tour preview"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-white pointer-events-none">
                 <div className="leading-tight">

@@ -43,10 +43,8 @@ const Hero = () => {
   }, [changeSlide, cycleKey, index, isPlaying]);
 
   useEffect(() => {
-    slides.forEach((item) => {
-      const img = new Image();
-      img.src = item.image;
-    });
+    const img = new Image();
+    img.src = slides[0].image;
   }, []);
 
   useEffect(() => {
