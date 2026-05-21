@@ -35,7 +35,7 @@ const AyushmanBanner = () => {
                 size="sm"
                 className="h-7 px-3 text-xs bg-yellow-400 hover:bg-yellow-300 text-green-900 font-bold border-0 shadow-none"
               >
-                <a href="https://beneficiary.nha.gov.in/" target="_blank" rel="noopener noreferrer">
+                <a href="#" target="_blank" rel="noopener noreferrer">
                   Check Eligibility <ExternalLink className="w-3 h-3 ml-1" />
                 </a>
               </Button>

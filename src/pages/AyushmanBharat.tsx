@@ -155,7 +155,7 @@ const Ayushman = () => (
             ))}
           </ul>
           <Button asChild variant="outline" className="mt-6">
-            <a href="https://beneficiary.nha.gov.in/" target="_blank" rel="noopener noreferrer">Check Eligibility Online <ArrowRight className="w-4 h-4" /></a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Check Eligibility Online <ArrowRight className="w-4 h-4" /></a>
           </Button>
         </motion.div>
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}

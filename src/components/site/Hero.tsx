@@ -108,7 +108,7 @@ const Hero = () => {
 
           {/* Ayushman pill — top right */}
           <motion.a
-            href="https://beneficiary.nha.gov.in/"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0 }}

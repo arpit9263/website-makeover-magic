@@ -230,7 +230,7 @@ const Header = () => {
             <NavItemWithDropdown to="/about" label="About" />
             <NavItemWithDropdown to="/ayushman-bharat" label="Ayushman" />
             <NavItemWithDropdown to="/departments" label="Departments" dropdown={<DepartmentsDropdown />} />
-            <NavItemWithDropdown to="/doctors" label="Doctors" />
+            {/* <NavItemWithDropdown to="/doctors" label="Doctors" /> */}
             <NavItemWithDropdown to="/services" label="Services" dropdown={<ServicesDropdown />} />
             <NavItemWithDropdown to="/gallery" label="Gallery" />
             <NavItemWithDropdown to="/contact" label="Contact" />
@@ -291,7 +291,7 @@ const Header = () => {
                 { to: "/", label: "Home" },
                 { to: "/about", label: "About" },
                 { to: "/ayushman-bharat", label: "Ayushman Bharat" },
-                { to: "/doctors", label: "Doctors" },
+                // { to: "/doctors", label: "Doctors" },
                 { to: "/gallery", label: "Gallery" },
                 { to: "/contact", label: "Contact" },
               ].map((item) => (

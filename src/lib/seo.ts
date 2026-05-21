@@ -121,7 +121,7 @@ export const routeSeo: Record<string, SeoConfig> = {
   "/about": {
     title: "About Kamla Hospital Jhansi | Best Multi-Specialty Hospital in Jhansi Since 1998",
     description:
-      "Kamla Hospital Jhansi is a leading multi-specialty hospital in Jhansi with 25+ years of trust, 120 beds, ICU/NICU/ICCU, 24x7 emergency, advanced diagnostics and Ayushman Bharat support — founded by Dr. Vinod Misuriya.",
+      "Kamla Hospital Jhansi is a leading multi-specialty hospital in Jhansi with 40+ years of trust, 120 beds, ICU/NICU/ICCU, 24x7 emergency, advanced diagnostics and Ayushman Bharat support — founded by Dr. Vinod Misuriya.",
     canonicalPath: "/about",
     structuredData: {
       "@context": "https://schema.org",

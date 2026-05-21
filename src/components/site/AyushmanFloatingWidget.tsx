@@ -66,7 +66,7 @@ const AyushmanFloatingWidget = () => {
                     size="sm"
                     className="w-full bg-[#1a6b3a] hover:bg-[#155831] text-white text-xs h-8 rounded-xl"
                   >
-                    <a href="https://beneficiary.nha.gov.in/" target="_blank" rel="noopener noreferrer">
+                    <a href="#" target="_blank" rel="noopener noreferrer">
                       Check Eligibility <ExternalLink className="w-3 h-3 ml-1" />
                     </a>
                   </Button>

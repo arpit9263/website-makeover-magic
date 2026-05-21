@@ -3,12 +3,15 @@ import { motion, useInView } from "framer-motion";
 import Layout from "@/components/site/Layout";
 import PageHeader from "@/components/site/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import {
   Heart, Eye, Target, Sparkles, Award, Building2, Shield, Stethoscope, Activity,
   Users, Ambulance, Baby, BadgeCheck, Phone, ArrowRight, Quote, Star, MapPin, Clock, HeartPulse,
 } from "lucide-react";
 import { hospitalInfo, testimonials } from "@/data/hospital";
+import vinodPhoto from "@/assets/vinodmisuriya.jpeg";
+import rajatPhoto from "@/assets/rajatMisuriya.jpeg";
+import archanaPhoto from "@/assets/ArchnaMisuriya.jpeg";
 import certNabh from "@/assets/cert-nabh.svg";
 import certJci from "@/assets/cert-jci.svg";
 import certIso from "@/assets/cert-iso.svg";
@@ -50,6 +53,7 @@ const leaders = [
     short: "Founder of Kamla Hospital Jhansi with 40+ years of clinical leadership and patient-first vision.",
     long: "Dr. Vinod Misuriya founded Kamla Hospital with a mission to bring trustworthy, ethical multi-specialty care to Jhansi. As a senior ENT specialist, he continues to guide the hospital's clinical standards, surgical excellence and a culture of compassion.",
     initials: "VM",
+    image: vinodPhoto,
   },
   {
     name: "Rajat Misuriya",
@@ -58,6 +62,7 @@ const leaders = [
     short: "Operational leader driving hospital quality, patient experience and modern infrastructure.",
     long: "Rajat Misuriya leads day-to-day operations, service quality and patient support systems at Kamla Hospital. He focuses on modern infrastructure, smooth admissions, and a warm, accessible patient experience for every family in Jhansi.",
     initials: "RM",
+    image: rajatPhoto,
   },
   {
     name: "Archna Misuriya",
@@ -66,6 +71,7 @@ const leaders = [
     short: "Champions compassionate care, nursing standards and patient-family communication.",
     long: "Archna Misuriya supports compassionate care standards across the hospital — from nursing and ward services to patient counselling — making sure every patient and family receives clear, empathetic communication throughout their treatment.",
     initials: "AM",
+    image: archanaPhoto,
   },
 ];
 
@@ -74,37 +80,62 @@ const LeaderCard = ({ l, i }: { l: typeof leaders[number]; i: number }) => (
     custom={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }}
     className="group relative"
   >
-    <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/40 via-primary-glow/30 to-[hsl(var(--gold))]/30 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
-    <div className="relative h-full rounded-3xl bg-card border border-border p-7 shadow-soft hover:shadow-strong transition-all duration-500 hover:-translate-y-1 overflow-hidden">
-      <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-primary/10 to-[hsl(var(--gold))]/10 blur-2xl" />
-      <div className="relative flex items-center gap-4 mb-5">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-hero text-primary-foreground flex items-center justify-center font-display font-extrabold text-xl shadow-medium">
-          {l.initials}
-        </div>
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">{l.role}</p>
-          <h3 className="font-display font-extrabold text-xl leading-tight">{l.name}</h3>
+    <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-primary/40 via-primary-glow/30 to-[hsl(var(--gold))]/30 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
+    <div className="relative h-full overflow-hidden rounded-[2rem] bg-card border border-border shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-strong">
+      <div className="relative overflow-hidden rounded-b-none rounded-[2rem] bg-muted">
+        <img
+          src={l.image}
+          alt={`Portrait of ${l.name}`}
+          className="h-64 w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+          <p className="text-xs uppercase tracking-[0.2em] text-white/75">{l.role}</p>
+          <h3 className="font-display text-2xl font-extrabold leading-tight">{l.name}</h3>
         </div>
       </div>
-      <p className="text-xs font-semibold text-muted-foreground mb-3 flex items-center gap-1.5">
-        <BadgeCheck className="w-3.5 h-3.5 text-primary" /> {l.qualification}
-      </p>
-      <p className="text-sm text-muted-foreground leading-relaxed mb-5">{l.short}</p>
-      <Dialog>
-        <DialogTrigger asChild>
-          <button className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all">
-            View profile <ArrowRight className="w-4 h-4" />
-          </button>
-        </DialogTrigger>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">{l.role}</p>
-            <DialogTitle className="font-display text-2xl">{l.name}</DialogTitle>
-            <DialogDescription className="text-sm">{l.qualification}</DialogDescription>
-          </DialogHeader>
-          <p className="text-sm text-muted-foreground leading-relaxed">{l.long}</p>
-        </DialogContent>
-      </Dialog>
+      <div className="relative p-7 pt-5">
+        <div className="flex items-center gap-2 mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <BadgeCheck className="w-4 h-4 text-primary" />
+          <span>{l.qualification}</span>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed mb-6">{l.short}</p>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary/10 hover:shadow-sm">
+              View profile <ArrowRight className="w-4 h-4" />
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-w-lg">
+            <div className="grid gap-5">
+              <div className="relative overflow-hidden rounded-3xl bg-muted">
+                <img src={l.image} alt={`Portrait of ${l.name}`} className="h-56 w-full object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <p className="text-xs uppercase tracking-[0.25em] text-white/80">{l.role}</p>
+                  <DialogTitle className="font-display text-2xl font-extrabold leading-tight">{l.name}</DialogTitle>
+                </div>
+              </div>
+              <div className="grid gap-3">
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">{l.qualification}</span>
+                  <span className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[hsl(var(--gold))]">Expert Leadership</span>
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">{l.long}</p>
+                <div className="grid gap-2 rounded-3xl bg-card/90 p-4 border border-border">
+                  <p className="text-sm font-semibold">Why patients choose this leader</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{l.short}</p>
+                </div>
+              </div>
+            </div>
+            <DialogFooter className="pt-4">
+              <Button asChild variant="outline" className="w-full sm:w-auto">
+                <button>Close</button>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   </motion.div>
 );
@@ -133,7 +164,7 @@ const whyChoose = [
   { icon: Activity, title: "Advanced Diagnostics", text: "X-Ray, Ultrasound, CT Scan, MRI and full pathology lab — quick reports, accurate guidance." },
   { icon: Shield, title: "Ayushman Bharat Approved", text: "Empanelled for PM-JAY cashless treatment for eligible beneficiaries." },
   { icon: Heart, title: "Patient-First Care", text: "Transparent counselling, clear pricing, and warm support staff at every touchpoint." },
-  { icon: BadgeCheck, title: "25+ Years of Trust", text: "Trusted by thousands of families across Jhansi and the Bundelkhand region since 1998." },
+  { icon: BadgeCheck, title: "40+ Years of Trust", text: "Trusted by thousands of families across Jhansi and the Bundelkhand region since 1998." },
 ];
 
 /* ---------------- Critical Care ---------------- */
@@ -174,7 +205,7 @@ const About = () => {
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative">
             <img src={hospitalInfo.images.exterior} alt="Kamla Hospital Jhansi exterior view" loading="lazy" width={1400} height={900} className="rounded-[2rem] shadow-strong w-full h-auto" />
             <div className="absolute -bottom-6 -right-6 glass rounded-2xl p-5 shadow-medium hidden md:block">
-              <p className="font-display font-extrabold text-3xl text-gradient">25+</p>
+              <p className="font-display font-extrabold text-3xl text-gradient">40+</p>
               <p className="text-xs text-muted-foreground">Years serving Jhansi</p>
             </div>
             <div className="absolute -top-6 -left-6 glass rounded-2xl p-4 shadow-medium hidden md:block">
@@ -286,7 +317,7 @@ const About = () => {
         <div className="container-tight">
           <div className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-3">Our Journey</p>
-            <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-4">25+ years of growth in Jhansi</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-extrabold mb-4">40+ years of growth in Jhansi</h2>
             <p className="text-muted-foreground">From a small clinic to a 120-bed multi-specialty hospital — milestones that shaped our care.</p>
           </div>
           <div className="relative">
