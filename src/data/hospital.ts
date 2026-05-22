@@ -30,7 +30,7 @@ export const hospitalInfo = {
   tagline: "The spirit to care",
   logo,
   phone: { reception: "05102320775", emergency: "8303792140" },
-  email: "kamlahosp6@gmail.com",
+  email: "kamlahospital425@gmail.com",
   workingHours: { opd: "10:00 AM to 7:00 PM", emergency: "Available 24x7" },
   diagnosticServices: ["X-Ray", "MRI", "CT Scan", "Lab Tests", "Other diagnostic services"],
   address: "Kamla Hospital, Jhansi, Uttar Pradesh",
@@ -62,6 +62,7 @@ export const departments: Department[] = [
   { id: "gastro-liver", name: "Gastro & Liver", icon: "Activity", description: "Specialized care for digestive, stomach, intestine and liver disorders.", treatments: ["Gastro Consultation", "Liver Disease Care", "Acidity & Ulcer Care", "Digestive Disorder Treatment", "Endoscopy Guidance"] },
   { id: "ophthalmology", name: "Ophthalmology", icon: "Eye", description: "Eye care and surgical consultation for vision and eye-related conditions.", treatments: ["Eye Checkup", "Cataract Consultation", "Vision Problems", "Eye Infection", "Ophthalmic Surgery"] },
   { id: "gynecology", name: "Gynecology", icon: "Baby", description: "Women’s health, maternity and gynecological care.", treatments: ["Gynecology Consultation", "Pregnancy Care", "Ultrasound Support", "Women’s Health", "Gynecological Surgery"] },
+  { id: "neurology", name: "Neurology", icon: "Brain", description: "Comprehensive care for nervous system disorders including seizures, headaches, stroke and nerve conditions.", treatments: ["Neurological Consultation", "Stroke Care", "Headache & Migraine Management", "Seizure Evaluation", "Nerve Disorder Support"] },
   { id: "neurosurgery", name: "Neurosurgery", icon: "Brain", description: "Specialist consultation for brain, spine and nervous system surgical conditions.", treatments: ["Neurosurgery Consultation", "Spine Problems", "Head Injury", "Brain & Nerve Care", "Surgical Opinion"] },
 ];
 

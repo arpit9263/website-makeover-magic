@@ -135,7 +135,7 @@ export const routeSeo: Record<string, SeoConfig> = {
   "/departments": {
     title: "Departments at Kamla Hospital Jhansi | Cardiology, Cardio Thoracic Surgery & Surgical Care",
     description:
-      "Explore Kamla Hospital Jhansi departments including Cardiology, Cardio Thoracic Surgery, General Surgery, General Medicine, Pulmonary Medicine, ENT, Orthopedics & Paediatrics, Dental & Maxillofacial, Gastro & Liver, Ophthalmology, Gynecology and Neurosurgery.",
+      "Explore Kamla Hospital Jhansi departments including Cardiology, Cardio Thoracic Surgery, General Surgery, General Medicine, Pulmonary Medicine, ENT, Orthopedics & Paediatrics, Dental & Maxillofacial, Gastro & Liver, Ophthalmology, Gynecology, Neurology and Neurosurgery.",
     canonicalPath: "/departments",
   },
   "/doctors": {
