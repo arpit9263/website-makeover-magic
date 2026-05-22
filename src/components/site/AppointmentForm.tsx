@@ -117,7 +117,7 @@ const AppointmentForm = () => {
           </SelectContent>
         </Select>
       </div>
-      <div>
+      {/* <div>
         <Label className="mb-1.5 flex items-center gap-2"><User className="w-3.5 h-3.5" /> Preferred doctor</Label>
         <Select value={form.doctor} onValueChange={(v) => setForm({ ...form, doctor: v })}>
           <SelectTrigger aria-label="Select preferred doctor"><SelectValue placeholder="Any available" /></SelectTrigger>
@@ -129,7 +129,7 @@ const AppointmentForm = () => {
               ))}
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
       <div className="sm:col-span-2">
         <Label htmlFor="date" className="mb-1.5 flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> Preferred date *</Label>
         <Input id="date" type="date" required min={new Date().toISOString().split("T")[0]} value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />

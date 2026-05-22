@@ -128,7 +128,7 @@ const Departments = () => {
                 </div>
                 <div>
                   <h3 className="font-display font-bold mb-3 text-sm uppercase tracking-wider text-primary">Specialists</h3>
-                  {deptDoctors.length > 0 ? (
+                  {/* {deptDoctors.length > 0 ? (
                     <ul className="space-y-3">
                       {deptDoctors.map((doc) => (
                         <li key={doc.id} className="flex items-center gap-3">
@@ -140,9 +140,9 @@ const Departments = () => {
                         </li>
                       ))}
                     </ul>
-                  ) : (
+                  ) : ( */}
                     <p className="text-sm text-muted-foreground">Specialists available on request</p>
-                  )}
+                  {/* )} */}
                   <Button asChild variant="hero" size="sm" className="mt-5 w-full">
                     <Link to="/appointment">Book consultation <ArrowRight className="w-4 h-4" /></Link>
                   </Button>
