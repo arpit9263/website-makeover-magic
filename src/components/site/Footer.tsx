@@ -182,7 +182,7 @@ const Footer = () => {
               {[
                 { to: "/about", label: "About Us" },
                 { to: "/departments", label: "Departments" },
-                { to: "/doctors", label: "Find a Doctor" },
+                // { to: "/doctors", label: "Find a Doctor" },
                 { to: "/services", label: "Services" },
                 { to: "/gallery", label: "Gallery" },
                 { to: "/appointment", label: "Book Appointment" },
