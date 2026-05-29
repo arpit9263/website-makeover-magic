@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import Layout from "@/components/site/Layout";
 import PageHeader from "@/components/site/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogFooter, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import {
   Heart, Eye, Target, Sparkles, Award, Building2, Shield, Stethoscope, Activity,
   Users, Ambulance, Baby, BadgeCheck, Phone, ArrowRight, Quote, Star, MapPin, Clock, HeartPulse,
@@ -56,20 +56,20 @@ const leaders = [
     image: vinodPhoto,
   },
   {
-    name: "Rajat Misuriya",
+    name: "Dr. Rajat Misuriya",
     role: "Managing Director",
     qualification: "BDS, MDS — Oral & Maxillofacial Surgeon",
     short: "Operational leader driving hospital quality, patient experience and modern infrastructure.",
-    long: "Rajat Misuriya leads day-to-day operations, service quality and patient support systems at Kamla Hospital. He focuses on modern infrastructure, smooth admissions, and a warm, accessible patient experience for every family in Jhansi.",
+    long: "Dr. Rajat Misuriya leads day-to-day operations, service quality and patient support systems at Kamla Hospital. He focuses on modern infrastructure, smooth admissions, and a warm, accessible patient experience for every family in Jhansi.",
     initials: "RM",
     image: rajatPhoto,
   },
   {
-    name: "Archna Misuriya",
+    name: "Dr. Archna Misuriya",
     role: "Managing Director",
-    qualification: "Hospital Administration",
+    qualification: "BDS, MDS — Hospital Administration",
     short: "Champions compassionate care, nursing standards and patient-family communication.",
-    long: "Archna Misuriya supports compassionate care standards across the hospital — from nursing and ward services to patient counselling — making sure every patient and family receives clear, empathetic communication throughout their treatment.",
+    long: "Dr. Archna Misuriya supports compassionate care standards across the hospital — from nursing and ward services to patient counselling — making sure every patient and family receives clear, empathetic communication throughout their treatment.",
     initials: "AM",
     image: archanaPhoto,
   },
@@ -129,9 +129,11 @@ const LeaderCard = ({ l, i }: { l: typeof leaders[number]; i: number }) => (
               </div>
             </div>
             <DialogFooter className="pt-4">
-              <Button asChild variant="outline" className="w-full sm:w-auto">
-                <button>Close</button>
-              </Button>
+              <DialogClose asChild>
+                <Button variant="outline" className="w-full sm:w-auto">
+                  Close
+                </Button>
+              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Dialog>
